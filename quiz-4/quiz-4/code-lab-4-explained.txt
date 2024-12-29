@@ -1,0 +1,106 @@
+EXAMPLE 1:
+
+Output:
+Child Process: PID = 3391599, Parent PID = 3391598
+Parent Process: PID = 3391598, Created Child PID = 3391599
+total 84
+-rw-rw-r-- 1 ppapadoe ppapadoe    54 Dec 28 21:26 README.md
+-rwxrwxr-x 1 ppapadoe ppapadoe 17048 Dec 28 22:35 example1
+-rw-rw-r-- 1 ppapadoe ppapadoe   856 Dec 28 22:33 example1.c
+-rw-rw-r-- 1 ppapadoe ppapadoe    65 Dec 28 21:34 hash_output.txt
+-rwxrwxr-x 1 ppapadoe ppapadoe   202 Dec 28 21:34 hash_script.sh
+-rwxrwxr-x 1 ppapadoe ppapadoe 16824 Dec 28 21:37 mysigcatch
+-rw-rw-r-- 1 ppapadoe ppapadoe   277 Dec 28 21:37 mysigcatch.c
+-rwxrwxr-x 1 ppapadoe ppapadoe 16872 Dec 28 21:39 mysigcatchmodified
+-rw-rw-r-- 1 ppapadoe ppapadoe   426 Dec 28 21:39 mysigcatchmodified.c
+Parent Process: Child has terminated.
+
+The application uses fork() to show how to create and manage processes in C. The parent process starts a child process and uses wait(NULL) to wait for it to finish. To list the contents of the directory, the child process uses execlp() to run the ls -l command. An error message appears if execlp() is unsuccessful. When the child process stops running, the parent process starts up again and prints a message. This program demonstrates how to synchronize parent and child processes, establish a new process, and run a different application within the kid process.
+
+
+
+EXAMPLE 2:
+
+Output:
+Current Process ID (PID): 3391609
+Parent Process ID (PPID): 3391572
+
+The application shows how to retrieve the process ID of the parent process and the process ID of the running process, respectively, using the C getpid() and getppid() functions. It provides details about the link between the current process and its parent process by printing these IDs to the standard output. This application serves as a basic illustration of how to retrieve and show process identifiers in an operating system similar to Unix.
+
+
+
+EXAMPLE 3:
+
+Output:
+Process ID: 3391654
+Press Ctrl+C to trigger SIGINT.
+Running... Press Ctrl+C to exit.
+Running... Press Ctrl+C to exit.
+Running... Press Ctrl+C to exit.
+Running... Press Ctrl+C to exit.
+^C
+Caught signal 2 (SIGINT). Exiting gracefully...
+
+The program shows how to use the signal function in C to handle the SIGINT signal. When the signal is activated, it is handled by a custom signal handler function called sigint_handler. The handler function prints the signal number and a message when the program receives SIGINT, which is often done by pressing Ctrl+C. It then gracefully ends by using exit(0). After configuring the signal handler with signal(SIGINT, sigint_handler), the main function goes into an endless loop where it waits for the signal and prints messages on a regular basis. This application demonstrates fundamental signal processing on an operating system similar to Unix.
+
+
+EXAMPLE 4: 
+
+Output:
+Process ID: 3391713
+Press Ctrl+C to attempt to send SIGINT.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+^C
+Received SIGINT (signal 2), but ignoring it.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+^C
+Received SIGINT (signal 2), but ignoring it.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+^C
+Received SIGINT (signal 2), but ignoring it.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+Running... Try pressing Ctrl+C.
+^Z
+[1]+  Stopped    ./example4
+
+The program shows how to use the signal function in C to handle the SIGINT signal. The purpose of the custom signal handler sigint_handler is to intercept the signal without taking any action that would end the program. The handler prints a message confirming that the signal has been received but proceeds with execution when the signal is triggered (for example, by pressing Ctrl+C). The main function enters an infinite loop and prints a message at regular intervals after configuring the signal handler with signal(SIGINT, sigint_handler). This application demonstrates how to modify or ignore a particular signal's behavior on an operating system that resembles Unix.
+
+
+
+EXAMPLE 5:
+
+Output:
+Parent process ID: 3392037. Child PID: 3392038
+Child process ID: 3392038. Waiting for SIGUSR1...
+Parent sending SIGUSR1 to child.
+Child received SIGUSR1 (signal 10).
+Parent sending SIGTERM to child.
+Child process terminated.
+
+The software shows how signals can be used to communicate between parent and child processes. Using the signal() function, the child process registers a custom signal handler for SIGUSR1, enabling it to display a message in response to the signal. The parent process uses kill() to send the child the SIGUSR1 signal, and then it uses the SIGTERM signal to end the child. The child's pause() function makes sure it waits for incoming signals indefinitely. This application demonstrates fundamental signal processing and interprocess communication in an operating system similar to Unix.
+
+
+
+
+
+
+
+
+
+
+
+
